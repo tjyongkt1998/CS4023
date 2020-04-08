@@ -1,0 +1,85 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <time.h>
+#include "utils.h"
+
+
+int main(int argc, char* argv[])
+{
+
+struct tm*local;
+time_t start, end;
+time(&start);
+printf("# Start time and date: %s",asctime(local));
+int rcount, ccount;
+char * ar2 = argv[2];
+char * ar4 = argv[4];
+char * end_ptr;
+float re,to;
+
+  re = strtof(ar2 , &end_ptr); 
+  to = strtof(ar4 , &end_ptr);
+
+  if(to < 0.0)
+ {
+  to = to*-1;
+ }
+
+
+
+  scanf("%d", rcount);
+  scanf("%d", ccount);
+
+
+
+ float** rows = (float **) malloc(rcount * sizeof(float *));
+ if (rows == 0)
+ {
+   fprintf(stderr, "Couldn’t alocate sufficient space.\n");
+    exit(1);
+ }
+   int i;
+   for (i = 0; i < rcount; i++)
+ {
+   float* row = (float *) malloc(ccount * sizeof(float));
+   if (row == 0)
+ {
+   fprintf(stderr, "Couldn’t alocate sufficient row space.\n");
+   exit(1);
+ }
+   rows[i] = row;
+ }
+
+
+   for(int i = 0; i < rcount; i++)
+   {
+     for (int j =0; j <ccount; j++)
+      {
+       fscanf(stdin, "%f", &rows[i][j]);
+       }
+    }
+
+     int counter = 0;
+     int r = 0;
+     int c = 0;
+    for ( r = 0; r <rcount;r++);
+   {
+      for ( c = 0; c <ccount;c++);
+     {
+       if(apEq (rows[r][c],re,to) == 1)
+       {
+         fprintf(stdout,"r=%d, c=%d: %.6f", r,c,rows[r][c]);
+         counter++;
+      }
+   }
+}
+printf("Found %d approximate matches.\n",counter);
+       time(&end);
+        local = localtime(&end);
+         printf("# End time and date: %s", asctime(local));
+
+
+          exit(0);
+}  
+       

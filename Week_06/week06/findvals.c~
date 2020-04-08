@@ -1,0 +1,100 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <time.h>
+#include "utils.h"
+
+
+int main(int argc, char* argv[])
+{
+
+float num1;
+float num2;
+
+struct tm *local;
+time_t start, end;
+ 
+time(&start);
+local = localtime(&start);
+ printf("lolab");
+printf("# Start time and date: %s", asctime(local));
+  printf("helloder");
+
+if(strcmp(argv[1], "-r") == 0){
+ num1 = strtof(argv[2],0);
+ num2 = strtof(argv[4],0);
+}
+else{
+ num2 = strtof(argv[2],0);
+ num1 = strtof(argv[4],0);
+}
+
+ if (num2 < 0.0){
+   num2 *= -1;
+ }
+
+ printf("hello");
+
+int rct; 
+int cct;
+
+fscanf(stdin, "%d", &rct);
+fscanf(stdin, "%d", &cct);
+
+ 
+ printf("2");
+
+ float** rows = (float **) malloc(rct * sizeof(float *));
+if (rows == 0)
+{
+fprintf(stderr, "Couldn’t alocate sufficient space.\n");
+exit(1);
+}
+int i;
+for (i = 0; i < rct; i++)
+{
+float* row = (float *) malloc(cct * sizeof(float));
+if (row == 0)
+{
+fprintf(stderr, "Couldn’t alocate sufficient row space.\n");
+exit(1);
+}
+rows[i] = row;
+}
+
+ printf("3");
+
+ int j;
+//reading info to array
+   for(i = 0; i < rct; i++)
+   {
+     for ( j = 0; j < cct; j++)
+      {
+       fscanf(stdin,"%f", &rows[i][j]);
+       }
+    }
+
+
+     int count = 0;
+    for ( i = 0; i <rct;i++);
+   {
+      for ( j = 0; j <cct;j++);
+     {
+       if(approxEqual(rows[i][j],num1,num2) == 1)
+       {
+         fprintf(stdout,"r=%d, c=%d: %.6f\n",i,j,rows[i][j]);
+         count++;
+      }
+   }
+}
+   
+  fprintf(stdout,"Found %d approximate matches.\n",count);
+time(&end);
+local = localtime(&end);
+printf("# End time and date: %s", asctime(local));
+
+exit(0);
+
+}
+
+
